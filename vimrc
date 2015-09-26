@@ -54,8 +54,6 @@
     let mapleader = ";"
 
 
-    set background=dark         " Assume a dark background
-
     " Allow to trigger background
     function! ToggleBG()
         let s:tbg = &background
@@ -68,9 +66,9 @@
     endfunction
     noremap <leader>bg :call ToggleBG()<CR>
 
-    " if !has('gui')
-        "set term=$TERM          " Make arrow and other keys work
-    " endif
+    if !has('gui')
+        set term=$TERM          " Make arrow and other keys work
+    endif
     filetype on                 " enables filetype detection
     filetype plugin indent on   " Automatically detect file types.
     syntax enable
@@ -103,7 +101,6 @@
     au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
     " Setting up the directories {
-        set backup                  " Backups are nice ...
         if has('persistent_undo')
             set undofile                " So is persistent undo ...
             set undolevels=1000         " Maximum number of changes that can be undone
@@ -116,13 +113,13 @@
 
 " Vim UI {
 
-    if !exists('g:override_spf13_bundles') && filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-        let g:solarized_termcolors=256
-        let g:solarized_termtrans=1
-        let g:solarized_contrast="normal"
-        let g:solarized_visibility="normal"
-        color solarized             " Load a colorscheme
-    endif
+    "if !exists('g:override_spf13_bundles') && filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+        "let g:solarized_termcolors=256
+        "let g:solarized_termtrans=1
+        "let g:solarized_contrast="normal"
+        "let g:solarized_visibility="normal"
+        "color solarized             " Load a colorscheme
+    "endif
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
@@ -165,7 +162,7 @@
     set smartcase                   " Case sensitive when uc present
     set wildmenu                    " Show list instead of just completing
     set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
-    set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
+    set whichwrap+=<,>,[,]   " Backspace and cursor keys wrap too
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=3                 " Minimum lines to keep above and below cursor
 
@@ -301,10 +298,10 @@
 " Plugins {
 
     " MiniBufExpl {
-        let g:miniBufExplMapWindowNavVim = 1
-        let g:miniBufExplMapWindowNavArrows = 1
-        let g:miniBufExplMapCTabSwitchBufs = 1
-        let g:miniBufExplModSelTarget = 1
+        "let g:miniBufExplMapWindowNavVim = 1
+        "let g:miniBufExplMapWindowNavArrows = 1
+        "let g:miniBufExplMapCTabSwitchBufs = 1
+        "let g:miniBufExplModSelTarget = 1
     " }
 
     " Supertab {
@@ -500,7 +497,8 @@
         " Use the powerline theme and optionally enable powerline symbols.
         " To use the symbols , , , , , , and .in the statusline
         " segments add the following to your .vimrc.before.local file:
-        "   let g:airline_powerline_fonts=1
+        let g:airline_powerline_fonts=1
+
         " If the previous symbols do not render for you then install a
         " powerline enabled font.
 
@@ -515,6 +513,23 @@
                 let g:airline_left_sep='›'  " Slightly fancier than '>'
                 let g:airline_right_sep='‹' " Slightly fancier than '<'
             endif
+            let g:airline#extensions#tabline#enabled = 1
+            "function! AccentDemo()
+                "let keys = ['a','b','c','d','e','f','g','h']
+                "for k in keys
+                    "call airline#parts#define_text(k, k)
+                "endfor
+                "call airline#parts#define_accent('a', 'red')
+                "call airline#parts#define_accent('b', 'green')
+                "call airline#parts#define_accent('c', 'blue')
+                "call airline#parts#define_accent('d', 'yellow')
+                "call airline#parts#define_accent('e', 'orange')
+                "call airline#parts#define_accent('f', 'purple')
+                "call airline#parts#define_accent('g', 'bold')
+                "call airline#parts#define_accent('h', 'italic')
+                "let g:airline_section_a = airline#section#create(keys)
+            "endfunction
+            "autocmd VimEnter * call AccentDemo()
         endif
     " }
 
